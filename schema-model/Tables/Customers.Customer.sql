@@ -2,6 +2,7 @@ CREATE TABLE [Customers].[Customer]
 (
 [CustomerID] [int] NOT NULL IDENTITY(1, 1),
 [Name] [nvarchar] (50) NOT NULL,
+[NickName] [nvarchar] (50) NULL,
 [Email] [nvarchar] (100) NOT NULL,
 [DateOfBirth] [date] NULL,
 [Phone] [nvarchar] (20) NULL,
