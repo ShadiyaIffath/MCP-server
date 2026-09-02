@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "flyway": {
+      "type": "stdio",
+      "command": "C:\\Users\\shadiya.iffath\\Documents\\Repositories\\flyway-main\\flyway-redgate-dist\\target\\install dir\\flyway-13.4.1-SNAPSHOT\\flyway.cmd",
+      "args": ["mcp"],
+      "env": { "REDGATE_FLYWAY_MCP_SERVER_FEATURE": "true" }
+    }
+  }
+}

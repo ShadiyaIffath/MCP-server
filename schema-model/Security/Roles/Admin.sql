@@ -1,0 +1,3 @@
+CREATE ROLE [Admin]
+AUTHORIZATION [dbo]
+GO

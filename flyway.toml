@@ -1,0 +1,146 @@
+databaseType = "SqlServer"
+id = "91e3c956-67d3-45cc-8622-564cb72f3ad8"
+name = "MCP server"
+
+[environments.Testing]
+password = "flywayPWD000"
+url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=Testing;trustServerCertificate=true"
+
+[environments.development]
+password = "flywayPWD000"
+url = "jdbc:sqlserver://127.0.0.1;authentication=sqlPassword;databaseName=dev;encrypt=mandatory;trustServerCertificate=true"
+user = "sa"
+
+[environments.shadow]
+password = "flywayPWD000"
+provisioner = "clean"
+url = "jdbc:sqlserver://127.0.0.1;authentication=sqlPassword;databaseName=shadow;encrypt=mandatory;trustServerCertificate=true"
+user = "sa"
+
+[environments.target1]
+password = "${localSecret.Flyway Desktop d5e9e57f-65b9-4cf7-9d13-0e95fef378fb}"
+url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=Production;trustServerCertificate=true"
+
+[flyway]
+baselineOnMigrate = true
+callbackLocations = [ "filesystem:callbacks" ]
+defaultSchema = "dbo"
+errorOverrides = [ "S0001:0:I-" ]
+locations = [ "filesystem:migrations" ]
+loggers = [ "auto" ]
+mixed = true
+outOfOrder = true
+schemaModelLocation = "schema-model"
+validateMigrationNaming = true
+
+[flyway.sqlserver.clean]
+mode = "all"
+
+[flyway.mcp]
+toolsets = "all"
+
+[flywayDesktop]
+enableMigrations = true
+showDeploymentDecision = true
+developmentEnvironment = "development"
+shadowEnvironment = "shadow"
+
+  [flywayDesktop.generate]
+  undoScripts = true
+
+[redgateCompare]
+filterFile = "filter.rgf"
+
+  [redgateCompare.sqlserver]
+  filterFile = "Filter.scpf"
+
+[redgateCompare.sqlserver.data.options.comparison]
+compressTemporaryFiles = false
+forceBinaryCollation = false
+treatEmptyStringAsNull = false
+trimTrailingWhiteSpace = false
+useChecksumComparison = false
+useMaxPrecisionForFloatComparison = false
+
+[redgateCompare.sqlserver.data.options.deployment]
+disableDdlTriggers = true
+disableDmlTriggers = false
+disableForeignKeys = false
+dontIncludeCommentsInScript = false
+dropPrimaryKeysIndexesAndUniqueConstraints = false
+reseedIdentityColumns = false
+skipIntegrityChecksForForeignKeys = false
+transportClrDataTypesAsBinary = false
+useExistenceChecks = false
+
+[redgateCompare.sqlserver.data.options.mapping]
+includeTimestampColumns = false
+useCaseSensitiveObjectDefinition = true
+
+[redgateCompare.sqlserver.options.behavior]
+addCreateOrAlterForRerunnableScripts = false
+addDropAndCreateForRerunnableScripts = false
+addNoPopulationToFulltextIndexes = false
+addObjectExistenceChecks = false
+addOnlineOnWhenCreatingIndexesOrAlteringColumns = false
+addWithEncryption = false
+considerNextFilegroupInPartitionSchemes = true
+decryptEncryptedObjects = true
+disableAutoColumnMapping = false
+dontUseAlterAssemblyToChangeClrObjects = false
+forbidDuplicateTableStorageSettings = false
+forceColumnOrder = false
+ignoreMigrationScripts = false
+includeDependencies = true
+includeRoleExistenceChecks = true
+includeSchemaExistenceChecks = true
+inlineFulltextFields = false
+inlineTableObjects = false
+useCaseSensitiveObjectDefinition = false
+useDatabaseCompatibilityLevel = false
+useSetStatementsInScriptDatabaseInfo = false
+writeAssembliesAsDlls = false
+
+[redgateCompare.sqlserver.options.ignores]
+ignoreAuthorizationOnSchemaObjects = false
+ignoreBindings = false
+ignoreChangeTracking = false
+ignoreCollations = true
+ignoreComments = false
+ignoreDataCompression = true
+ignoreDataSyncSchema = false
+ignoreDatabaseAndServerNameInSynonyms = true
+ignoreDmlTriggers = false
+ignoreDynamicDataMasking = false
+ignoreEventNotificationsOnQueues = false
+ignoreExtendedProperties = false
+ignoreFileGroupsPartitionSchemesAndPartitionFunctions = true
+ignoreFillFactorAndIndexPadding = true
+ignoreFullTextIndexing = false
+ignoreIdentitySeedAndIncrementValues = false
+ignoreIndexes = false
+ignoreInsteadOfTriggers = false
+ignoreInternallyUsedMicrosoftExtendedProperties = false
+ignoreLockPropertiesOfIndexes = false
+ignoreNocheckAndWithNocheck = false
+ignoreNotForReplication = true
+ignoreNullabilityOfColumns = false
+ignorePerformanceIndexes = false
+ignorePermissions = false
+ignoreReplicationTriggers = true
+ignoreSchemas = false
+ignoreSensitivityClassifications = false
+ignoreSetQuotedIdentifierAndSetAnsiNullsStatements = false
+ignoreSquareBracketsInObjectNames = false
+ignoreStatistics = true
+ignoreStatisticsIncremental = false
+ignoreStatisticsNoRecomputePropertyOnIndexes = false
+ignoreSynonymDependencies = false
+ignoreSystemNamedConstraintAndIndexNames = false
+ignoreTsqltFrameworkAndTests = true
+ignoreUserProperties = true
+ignoreUsersPermissionsAndRoleMemberships = true
+ignoreWhiteSpace = true
+ignoreWithElementOrder = true
+ignoreWithEncryption = false
+ignoreWithNoCheck = true

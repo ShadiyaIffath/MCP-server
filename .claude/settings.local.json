@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__flyway__load_project",
+      "mcp__flyway__create_targeted_diff_migrations",
+      "mcp__flyway__reload_project",
+      "mcp__flyway__create_diff_schema_model",
+      "mcp__flyway__get_diff_details",
+      "mcp__flyway__create_diff_migrations",
+      "mcp__flyway__create_diff_development",
+      "mcp__flyway__update_development",
+      "mcp__flyway__create_before_pull_snapshot",
+      "Bash(git pull *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Initialise Flyway Desktop project *)"
+    ]
+  }
+}
