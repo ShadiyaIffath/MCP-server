@@ -80,13 +80,54 @@ disk is already at the pre-pull baseline — leave it alone.
 ## Running the scenario
 
 Open this directory in your MCP client, then follow
-[`scripts/README.md`](scripts/README.md) from step 1.
+[`scripts/README.md`](scripts/README.md) from step 1. At step 3 (the
+simulated pull), pick one of the flows below.
 
-## Reset between runs
+### Flow A — script (default)
+
+Stay on `master`. Schema-model on disk is at the pre-pull baseline.
+After `create_before_pull_snapshot`:
+
+```
+python scripts/apply_pull_edits.py
+```
+
+Reset: `python scripts/apply_pull_edits.py --revert`.
+
+### Flow B — real `git merge` from `master`
+
+Same starting point (`master`, pre-pull on disk). After
+`create_before_pull_snapshot`:
+
+```
+git merge --ff-only post-pull
+```
+
+That fast-forwards master onto the `post-pull` branch, which contains the
+same schema-model edits the Python script would apply (adds `NickName`,
+adds `CustomerPreference`, deletes `OldFeature` and `SunsetFeature`).
+
+Reset: `git reset --hard eb12497` (master tip before the merge).
+
+### Flow C — checkout-based on `post-pull`
+
+If you'd rather have the "latest" already checked out and rewind to take
+the snapshot:
+
+```
+git checkout post-pull
+git checkout HEAD~1     # detach at pre-pull → take snapshot here
+git checkout post-pull  # back to post-pull → create diff here
+```
+
+No reset needed between runs — the branch never moves.
+
+## Reset the dev database between runs
+
+Regardless of which flow you used, re-seed the DB:
 
 ```
 sqlcmd -S <server> -U <user> -P <password> -d <database> -i scripts/99_reset.sql
-python scripts/apply_pull_edits.py --revert
 sqlcmd -S <server> -U <user> -P <password> -d <database> -i scripts/00_setup_dev.sql
 ```
 
